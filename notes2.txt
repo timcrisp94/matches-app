@@ -1,0 +1,230 @@
+INTRO to EXPRESS
+Express uses Node's built-in HTTP module to listen for, and respond , to HTTP requests
+ See server.js
+ // import modules
+
+import express from 'express'
+
+// Create Express app
+
+const app = express()
+
+// Configure the app (app.set)
+app.set('view engine, 'ejs')
+
+
+// Mount Middleware (app.use)
+
+
+
+// Mount routes
+  GET
+  app.get('/', function(req, res) {
+    res.send(<h1>hello, world</h1>)
+  })
+
+
+
+// Tell the app to listen on port 3000
+
+app.listen(3000, function() {
+  console.log('Listening on port 3000')
+})
+
+Express uses the http method and the path of the HTTP request to match a route defined in the application
+Route methods: 
+  GET
+  app.get('/', function(req, res) {
+    res.send(<h1>hello, world</h1>)
+  })
+  '/' defines the route of the path -- in express all strings used to define a path should start with a forward slash / 
+  the second argument is a callback function, it's parameters are (req, res)
+  req - request object. The request object has properties and methods to access information regarding the current http request, including any data the browser has sent
+  res - response object. The response object contains properties and methods used to end the req, res cycle
+Routes will always be mounted in server.js and routes will always have a callback function with a req and res parameter
+
+Ways to respond to a request (reference the chart)
+- `res.render()` - Render a view template and send the resulting HTML to the browser.
+- `res.redirect()` - Tell the browser to issue another GET request.
+- `res.json()` - Send a JSON response (used when we communicate via AJAX).
+Express uses res.render to process a template using a view engine (our is EJS) and return the resulting html to the browser
+- VIEW templates are stored in the views folder
+ 
+  -EX: 
+    1. views/home.EJS --> an ejs template for our home page
+    2. in server.js, use GET /home route's callback to render our new template
+    
+      app.get('/home', function(req, res) {
+        res.render('home')
+      })  
+    The app is configured to our view engine:
+      // Configure the app (app.set)
+      app.set('view engine, 'ejs')
+
+res.render(view [, locals] [, callback])
+Renders a view and sends the rendered HTML string to the client. Optional parameters:
+
+locals, an object whose properties define local variables for the view.
+callback, a callback function. If provided, the method returns both the possible error and rendered string, but does not perform an automated response. When an error occurs, the method invokes next(err) internally.
+// if a callback is specified, the rendered HTML string has to be sent explicitly
+res.render('index', function (err, html) {
+  res.send(html)
+})
+
+This is a route responsible for displaying a list of To Do's
+app.get('/todos', function(req, res) {
+  todoDb.find({}, function(error, todos) {
+    res.render('todos/index', {
+      todos: todos,
+      error: error
+    })
+  })
+})
+// Note line 76: the empty object passed as the first argument in todoDb.find({}, is used to return all the items in the todo's database as todos in the second parameter of the callback function
+  so: 
+  app.get('/matches, function(req, res) {
+    matchesDb.find({}, function(err, matches) {
+      res.renders('matches/index), {
+        matches: matches,
+        err: err
+      })
+    })
+  })
+  To pass data to a view, we pass an object as a second argument to `render`. We should now be able to access a `matches` variable and an `error` variable in the `matches/index` view.
+
+Group views related to data in their own folder. We use INDEX as a name for views used for all of something
+
+Dynamic Templating using EJS 
+
+<body>
+  <h1>matches</h1>
+  <% if(error) { %>
+    <h2><%= error %></h2>
+  <% } %>
+  <ul>
+    <% matches.forEach(function(match) { %>
+      <li>
+        <%= match.name %>
+        <%= match.event %>
+        <%= match.year %>
+        <%= match.company %>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+//Recall: the <% %> EJS tags are for executing JS, such as control flow
+  //The <%= %> EJS tags are for writing JS expressions in the html page
+
+res.redirect method to redirect to GET /home 
+  app.get('/', function(req, res) {
+    res.redirect('/home')
+  })
+  //redirects tell the browser to make a new get request to the provided path. 
+  //note the /home => redirect always starts with a slash
+
+  EXPRESS ROUTERS & CONTROLLERS
+  Model-View-Controller til forever
+
+  We define routes using Express router objects to organize related routes
+    create each router in its own module from which it is exported
+    import the exported router inside of server.js
+    mount the router object in the request pipeline
+    -Route objects are also middleware functions
+    Router objects can provide more flexible and powerful routing in complex apps
+    Router objects have their own middleware
+  Our routes folder contains router modules for example:
+    index.js: for defining general-purpose routes
+    auth.js: ouath routes
+
+These are mounted in with middleware pipeline on server.js
+// router middleware
+app.use('/', indexRouter)
+app.use('/auth', authRouter)
+    
+Matches Router : routes/matches.js
+server.js : import { router as matchesRouter } from './routes/matches.js'
+  //router middleware : app.use('/matches', matchesRouter)
+
+routes/matches.js: 
+// GET - localhost: 3000/matches
+router.get('/', matchesCtrl.index)
+
+routes/index.js:
+router.get('/', function (req, res) {
+  res.render('index', { title: 'Matches' })
+})
+
+CONTROLLERS
+Controllers use models to perform Create Retrieve Update Delete data operations (crud)
+  implement any additional app logic, often relying on other services and utility modules (db)
+  pass data to views to be rendered then return the resulting markup to the browser
+
+Controllers are functions
+  This is a refactoring of the function on line 85. To separate all concerns, it is now in controlllers/matches.js:
+  function index(req, res) {
+  Match.find({})
+  .then(matches => {
+    res.render('matches/index', {
+      matches,
+      title: 'Matches'
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/matches')
+  })
+}
+
+This is our index callback function. The index action's job is to return all our matches. 
+
+We export all of our controller methods/controller actions.
+  The controller is imported into routes/matches.js at the top: import * as matchesCtrl from '../controllers/matches.js'
+  // the import allows us to call the controller in routes/matches.js:
+   // GET - localhost: 3000/matches
+    router.get('/', matchesCtrl.index)
+
+URL Parameters, also known as Route Parameters, just like parameters in functions, provide a way for data to pass into the router & controller via the URL of the request.
+
+In Express, we define route parameters in the path string using a colon, followed by the parameter name.
+
+- Let’s say we want to view a details page for a resource.
+- Like how we use an **index** route/action to list all of a resource, we will use a **show** route/action when displaying the details of a single resource.
+
+The route for a single match is 
+
+1. GET /match/:id 
+
+2. UI that sends a request that match on views/matches/index.ejs:
+<section>
+  <h1>Matches</h1>
+  <h2>All My Matches</h2>
+  <ul>
+    <% matches.forEach(match => { %>
+      <li>
+        <a href="/matches/<%= match._id %>"><%= match.name %></a> 
+      </li>
+    <% }) %>
+  </ul>
+</section>
+
+3. Add the show route below the index route on routes/matches.js
+router.get('/:id', matchesCtrl.show)
+
+4. Add the show action inside of controllers/matches.js
+function show(req, res) {
+  Match.findById(req.params.id)
+  .populate("owner")
+  .then(match => {
+    console.log(match)
+    res.render('matches/show', {
+      match,
+      title: "show"
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/matches")
+  })
+}
+
+5. Copy boilerplate into newly touch'd views/matches/show

@@ -4,6 +4,14 @@
 <section>
   <h1>Matches</h1>
   <h2>All My Matches</h2>
-	</section>
+  <ul>
+    <% matches.forEach(match => { %>
+      <li>
+        <a href="/matches/<%= match._id %>"><%= match.name %></a> 
+      </li>
+    <% }) %>
+  </ul>
+</section>
+
 
 <%- include('../partials/footer') %>

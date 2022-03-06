@@ -12,7 +12,7 @@ router.get('/:id', matchesCtrl.show)
 // GET - localhost:3000/matches/:id/edit
 router.get('/:id/edit', matchesCtrl.edit)
 
-// POST - localhost:3000/matches/new
+// POST - localhost:3000/matches/
 router.post('/', matchesCtrl.create)
 
 // PUT - localhost:3000/matches/:id

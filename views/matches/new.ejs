@@ -4,32 +4,28 @@
 
 
 <main>
-  <h1><%= title %></h1>
-  <form id="new-form" action="/matches/<%= match._id %>?_method=POST">
+  <h1>title</h1>
+  <form id="new-form" action="/matches" method="POST">
     <label for="title-input">Title:</label>
     <input 
       type="text" 
       name="title" 
-      value="<%= match.name %>" 
       id="title-input">
     <label for="event-input">Event:</label>
     <input 
       type="text" 
       name="event" 
-      value="<%= event.name %>"
       id="event-input">
     <label for="event-year-input">Event Year:</label>
     <input 
       type="text" 
-      name="eventYear"
-      value="<%= movie.eventYear %>"
+      name="eventYear"    
       id="event-year-input"
     >
     <label for="company-input">Company:</label>
     <input
       type= "text" 
-      name="company" 
-      value="<%= match.company %>" 
+      name="company"       
       id="company">
     <button type="submit">Save Match</button>
   </form>

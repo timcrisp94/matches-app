@@ -23,11 +23,11 @@ const matchSchema = new Schema ({
     type: Number
   },
   company: {
-    String,
+    type: String,
     required: true
   },  
-  wrestlers: [{type: Schema.Types.ObjectId, ref: 'Wrestler'}],
-  reviews: [reviewSchema]
+  // wrestlers: [{type: Schema.Types.ObjectId, ref: 'Wrestler'}],
+  // reviews: [reviewSchema]
   // owner: {type: Schema.Types.ObjectId, ref: 'Profile'},
 }, {
   timestamps: true

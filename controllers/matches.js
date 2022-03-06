@@ -19,15 +19,12 @@ function newMatch(req, res) {
 }
 
 function create(req, res) {
-  console.log('complete me')
-  Match.create(req.body)
-  .then(match => {
-    res.redirect('/matches')
+  const match = new Match(req.body)
+  match.save(function(err) {
+    if (err) return res.redirect('/matches/new')
+    res.redirect('/matches/new')
   })
-  .catch(err => {
-    console.log(err)
-    res.redirect('/matches')
-  })
+  console.log(match)
 }
 
 function show(req, res) {

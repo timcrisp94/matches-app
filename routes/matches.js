@@ -6,14 +6,14 @@ const router = Router()
 // GET - localhost: 3000/matches
 router.get('/', matchesCtrl.index)
 //GET - localhost: 3000/matches/new
-router.get('/new', matchesCtrl.new)
+//router.get('/new', matchesCtrl.new)
 // GET - localhost: 3000/matches/:id
 router.get('/:id', matchesCtrl.show)
 // GET - localhost:3000/matches/:id/edit
 router.get('/:id/edit', matchesCtrl.edit)
 
 // POST - localhost:3000/matches/new
-router.post('/', isLoggedIn, matchesCtrl.create)
+router.post('/', matchesCtrl.create)
 
 // PUT - localhost:3000/matches/:id
   router.put(":/id", matchesCtrl.update)

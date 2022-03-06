@@ -11,10 +11,21 @@ const reviewSchema = new Schema({
 
 
 const matchSchema = new Schema ({
-  name: String,
-  event: String,
-  eventYear: {type: Number},
-  company: String,
+  name: {
+    type: String,
+    required: true
+  }, 
+  event: {
+    type: String,
+    required: true
+  },
+  eventYear: {
+    type: Number
+  },
+  company: {
+    String,
+    required: true
+  },  
   wrestlers: [{type: Schema.Types.ObjectId, ref: 'Wrestler'}],
   reviews: [reviewSchema]
   // owner: {type: Schema.Types.ObjectId, ref: 'Profile'},

@@ -409,7 +409,7 @@ const matchSchema = new Schema ({
 MONGOOSE EMBEDDING
 Added partials and stylesheet link to all views
 
-Inserted and updated views/movies/show.ejs
+Inserted and updated views/matches/show.ejs
 
 <main>
   <h1><%= match.name %></h1>
@@ -581,3 +581,8 @@ const reviewSchema = new Schema({
     })
   })
 }
+REFERENCING
+With embedding, parent documents hold subdocuments. Using referencing, a document contains just the related document's ObjectId
+
+populate
+

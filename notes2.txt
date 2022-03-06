@@ -323,4 +323,85 @@ Delete a Match
 }
 5. redirect to matches
   // NOTE: the lesson adds a findByIdAndDelete method to the 'todo data', what comparable function might we need to add??
-  
+
+MONGOOSE 
+
+Mongoose is called an an Object Document Mapper (ODM) because it maps object-oriented JavaScript to MongoDB documents.
+
+Mongoose Schema --compiles into--> Mongoose Model --accesses--> MongoDB
+const matchSchema  --> const Match --> import { Match } from '..models/match.js
+
+in the controller we use the Match model to perform CRUD on the matches collection in the MongoDB
+
+database is connected via .env
+
+config/database.js 
+import mongoose from 'mongoose'
+//shortcut to mongoose connection object
+const db = mongoose.connection
+
+matchSchema is defined in models/match.js
+  tho not completely
+// Compile the schema into a model and export it
+  const Match = mongoose.model('Match', matchSchema)
+
+Use a Model in two ways to create documents in the collection:
+1. const instance = new Model(<object>), then instance.save()
+2. Model.create(<object or array of objects>)
+
+Recall: Five Easy Steps
+1. Determine the restful route
+2. Add the UI that triggers the http request that matches the Route
+3. Define the route and map it to the controller method
+4. Add the controller method and export it
+5. In the controller, perform the necessary crud then render or redirect. If render, code the view template if necessary
+
+Data is two part. First part is
+1. GET /matches/new - have that
+Second part is
+1. POST /matches/new - have that
+
+This is the Movie model, just in case
+function create(req, res) {
+  // convert nowShowing's checkbox of nothing or "on" to boolean
+  req.body.nowShowing = !!req.body.nowShowing
+  // replace and split if it's not an empty string
+  if (req.body.cast) {
+		// remove whitespace next to commas
+    req.body.cast = req.body.cast.split(', ')
+  }
+  const movie = new Movie(req.body)
+  movie.save(function(err) {
+    // one way to handle errors
+		if (err) return res.redirect('/movies/new')
+    // for now, redirect right back to new.ejs
+    res.redirect('/movies/new')
+  })
+}
+
+Common Model Methods to Query Data
+find - returns an array of all documents matching the query object
+  Movie.find({mpaaRating: 'PG'}, function(err, movies) {
+  ...
+})
+findById
+  Movie.findById(req.params.id, function(err, movie) {
+  ...
+})
+findOne
+  Movie.findOne({releaseYear: 2000}, function(err, movie) {
+  ...
+})
+
+Add Timestamps to Schema constructor as follows
+const matchSchema = new Schema ({
+  name: String,
+  event: String,
+  year: {type: Number},
+  company: String,
+  wrestlers: [{type: Schema.Types.ObjectId, ref: 'Wrestler'}],
+  owner: {type: Schema.Types.ObjectId, ref: 'Profile'}
+}, {
+  timestamps: true
+})
+//note matchSchema and wrestlerSchema need ObjectId properties

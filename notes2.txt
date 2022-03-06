@@ -534,4 +534,50 @@ Edit Part 2
       res.redirect(`/matches/${matches._id}`)
   }) 
 }
-5. redurect to matches/:id
+5. redirect to matches/:id
+
+--marking 10th commit: fixed some errors, have a headache
+
+Embedding Subdocuments (ratings)
+Subdocuments have their own schema, but since subdocuments are not saved to a collection -they are saved within their parent document- we do not compile a subdocument’s schema into a Model.
+
+ratingSchema
+const reviewSchema = new Schema({
+  content: String,
+  rating: {type: Number, min: 1, max: 5, default: 5}
+}, {
+  timestamps: true
+})
+
+* < Add a review > * let us decide what our logic is for the review before we go through These
+
+1. POST /matches/:id/reviews
+2. here is the form added to views/movies/show.ejs
+<form 
+    id="add-review-form"
+    action="/movies/<%= movie._id %>/reviews"
+    method="POST"
+  >
+    <label for="content-textarea">Review:</label>
+    <textarea name="content" id="content-textarea"></textarea>
+    <label for="rating-select">Rating:</label>
+    <select name="rating" id="rating-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5" selected>5</option>
+    </select>
+    <button type="submit">Add Review</button>
+  </form>
+  3. add route
+  router.post('/:id/reviews', matchesCtrl.createReview)
+  4. function createReview 
+    function createReview(req, res) {
+      Movie.findById(req.params.id, function(err, movie) {
+        movie.reviews.push(req.body)
+        movie.save(function(err) {
+          res.redirect(`/movies/${movie._id}`)
+    })
+  })
+}

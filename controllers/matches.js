@@ -14,6 +14,10 @@ function index(req, res) {
   })
 }
 
+function newMatch(req, res) {
+  res.render('matches/new')
+}
+
 function create(req, res) {
   console.log('complete me')
   Match.create(req.body)
@@ -75,6 +79,7 @@ function deleteMatch(req, res) {
 
 export {
   index,
+  newMatch as new,
   create,
   show,
   deleteMatch as delete,

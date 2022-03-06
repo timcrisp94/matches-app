@@ -408,3 +408,130 @@ const matchSchema = new Schema ({
 
 MONGOOSE EMBEDDING
 Added partials and stylesheet link to all views
+
+Inserted and updated views/movies/show.ejs
+
+<main>
+  <h1><%= match.name %></h1>
+  <section>
+    <div>Company: </div>
+    <div><%= match.company %></div>
+    <div>Event: </div>
+    <div><%= match.event %></div>
+    <div>Release Year: </div>
+    <div><%= match.eventYear %></div>
+    <div>Wrestlers: </div>
+    <div><%= match.wrestlers.join(', ') %></div>
+    </section>
+</main>
+
+
+Cut but am holding taco cat show view here for reference
+<section>
+  <h1><%= match.name %></h1>
+  <!-- //<% if (user) { %>
+    <form 
+      action="
+      //tacos/<%= taco._id %>/flip-tasty?_method=PATCH"
+      method="POST"
+    >
+      <button class="btn" type="submit">
+        Make taco 
+        //<%= taco.tasty ? "not tasty 😠" : "tasty 🎉" %> 
+      </button>
+    </form>
+  //<% } %>
+  //<% if (taco.owner.equals(user?.profile._id)) { %>
+    <form action="
+    //matches/<%= match._id %>/edit" method="GET">
+      <button class="btn" type="submit">Edit Match</button>
+    </form>
+    <form action="/matches/ 
+    //<%= match._id %>?_method=DELETE" method="POST">
+      <button class="btn" type="submit">Delete Match</button>
+    </form>
+ // <% } %> -->
+</section>
+
+Add Edit Function 
+1. GET /matches/:id/edit
+2. <form action="/matches/<%= match._id %>/edit"
+        method="GET">
+      <button class="btn" type="submit">Edit Match</button>
+   </form>
+3. on routes/matches/:id/edit
+  // GET - localhost:3000/matches/:id/edit
+      router.get('/:id/edit', matchesCtrl.edit)
+4. on controllers/matches.js
+function edit(req, res) {
+  Match.findById(req.params.id, function(err, movie) {
+    res.render('matches/edit', {
+      movie,
+      err,
+      title: "Edit Match"
+    })
+  })
+}
+5. touch views/matches/edit.ejs
+Copy from new:
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/main.css">
+<%- include('../partials/nav') %>
+
+
+<body>
+  <h1>New Match</h1>
+  <form action="/matches" method="POST" autocomplete="off">
+    <input type="text" name="text">
+    <button type="submit">Save Match</button>
+  </form>
+</body>
+
+<%- include('../partials/footer') %>
+
+Here is the edit view / new view
+// note we don't have all of our inputs yet**
+<main>
+  <h1><%= title %></h1>
+  <form id="new-form" action="/matches/<%= match._id %>?_method=PUT" method="POST">
+    <label for="title-input">Title:</label>
+    <input 
+      type="text" 
+      name="title" 
+      value="<%= match.name %>" 
+      id="title-input">
+    <label for="event-input">Event:</label>
+    <input 
+      type="text" 
+      name="event" 
+      value="<%= event.name %>"
+      id="event-input"
+    <label for="event-year-input">Event Year:</label>
+    <input 
+      type="text" 
+      name="eventYear"
+      value="<%= movie.eventYear %>"
+      id="event-year-input"
+    >
+    <label for="company-input">Company:</label>
+    <input
+      type= "text" 
+      name="company" 
+      value="<%= match.company %> 
+      id="company">
+    <button type="submit">Save Match</button>
+  </form>
+</main>
+
+Edit Part 2
+1. PUT /movies/:id
+2. ui done
+3. // PUT - localhost:3000/matches/:id
+  router.put(":/id", matchesCtrl.update)
+4. function update(req, res){
+  Match.findByIdAndUpdate(req.params.id, 
+    req.body, function(err, match) { 
+      res.redirect(`/matches/${matches._id}`)
+  }) 
+}
+5. redurect to matches/:id

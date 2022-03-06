@@ -2,31 +2,32 @@
 <link rel="stylesheet" href="/stylesheets/main.css">
 <%- include('../partials/nav') %>
 
-<section>
+<main>
   <h1><%= match.name %></h1>
-  <!-- //<% if (user) { %>
-    <form 
-      action="
-      //tacos/<%= taco._id %>/flip-tasty?_method=PATCH"
-      method="POST"
-    >
-      <button class="btn" type="submit">
-        Make taco 
-        //<%= taco.tasty ? "not tasty 😠" : "tasty 🎉" %> 
-      </button>
-    </form>
-  //<% } %>
-  //<% if (taco.owner.equals(user?.profile._id)) { %>
-    <form action="
-    //matches/<%= match._id %>/edit" method="GET">
+  <section>
+    <div>Company: </div>
+    <div><%= match.company %></div>
+    <div>Event: </div>
+    <div><%= match.event %></div>
+    <div>Release Year: </div>
+    <div><%= match.eventYear %></div>
+    <div>Wrestlers: </div>
+    <div><%= match.wrestlers.join(', ') %></div>
+    <div>
+      <form action="/matches/<%= match._id %>/edit"
+        method="GET">
       <button class="btn" type="submit">Edit Match</button>
     </form>
-    <form action="/matches/ 
-    //<%= match._id %>?_method=DELETE" method="POST">
-      <button class="btn" type="submit">Delete Match</button>
+    <div>
+      <form action="/matches/<%= match._id %>?_method=DELETE" method="POST">
+      <button>Delete Match</button>
     </form>
- // <% } %> -->
-</section>
+
+    </div>
+    </section>
+</main>
+
+
 
 
 <%- include('../partials/footer') %>

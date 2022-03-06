@@ -9,9 +9,14 @@ router.get('/', matchesCtrl.index)
 router.get('/new', matchesCtrl.new)
 // GET - localhost: 3000/matches/:id
 router.get('/:id', matchesCtrl.show)
+// GET - localhost:3000/matches/:id/edit
+router.get('/:id/edit', matchesCtrl.edit)
 
 // POST - localhost:3000/matches/new
 router.post('/', isLoggedIn, matchesCtrl.create)
+
+// PUT - localhost:3000/matches/:id
+  router.put(":/id", matchesCtrl.update)
 
 // DELETE - localhost:3000/matches/:id
 router.delete('/:id', matchesCtrl.delete)

@@ -42,6 +42,23 @@ function show(req, res) {
   })
 }
 
+function edit(req, res) {
+  Match.findById(req.params.id, function(err, movie) {
+    res.render('matches/edit', {
+      movie,
+      err,
+      title: "Edit Match"
+    })
+  })
+}
+
+function update(req, res){
+  Match.findByIdAndUpdate(req.params.id, 
+    req.body, function(err, match) { 
+      res.redirect(`/matches/${matches._id}`)
+  }) 
+}
+
 function deleteMatch(req, res) {
   Match.findById(req.params.id)
   .then(match => {
@@ -61,4 +78,6 @@ export {
   create,
   show,
   deleteMatch as delete,
+  edit,
+  update
 }

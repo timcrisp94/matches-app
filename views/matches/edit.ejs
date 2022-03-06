@@ -3,9 +3,10 @@
 <%- include('../partials/nav') %>
 
 
+
 <main>
   <h1><%= title %></h1>
-  <form id="new-form" action="/matches/<%= match._id %>?_method=POST">
+  <form id="new-form" action="/matches/<%= match._id %>?_method=PUT" method="POST">
     <label for="title-input">Title:</label>
     <input 
       type="text" 

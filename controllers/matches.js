@@ -14,6 +14,18 @@ function index(req, res) {
   })
 }
 
+function create(req, res) {
+  console.log('complete me')
+  Match.create(req.body)
+  .then(match => {
+    res.redirect('/matches')
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/matches')
+  })
+}
+
 function show(req, res) {
   Match.findById(req.params.id)
   .populate("owner")
@@ -26,11 +38,27 @@ function show(req, res) {
   })
   .catch(err => {
     console.log(err)
-    res.redirect("/matches")
+    res.redirect('/matches')
+  })
+}
+
+function deleteMatch(req, res) {
+  Match.findById(req.params.id)
+  .then(match => {
+    match.delete()
+    .then(() => {
+      res.redirect('/matches')
+    })
+  })
+  .catch(err => {
+    console.log('the error:', err)
+    res.redirect('/matches')
   })
 }
 
 export {
   index,
-  show
+  create,
+  show,
+  deleteMatch as delete,
 }

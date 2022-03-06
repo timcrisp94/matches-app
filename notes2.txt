@@ -405,3 +405,6 @@ const matchSchema = new Schema ({
   timestamps: true
 })
 //note matchSchema and wrestlerSchema need ObjectId properties
+
+MONGOOSE EMBEDDING
+Added partials and stylesheet link to all views

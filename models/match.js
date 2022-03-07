@@ -11,10 +11,6 @@ const reviewSchema = new Schema({
 
 
 const matchSchema = new Schema ({
-  name: {
-    type: String,
-    required: true
-  }, 
   event: {
     type: String,
     required: true

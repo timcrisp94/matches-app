@@ -23,14 +23,17 @@ const matchSchema = new Schema ({
     type: String,
     required: true
   },
-  forTitle : {
-    type: Boolean,
-    default: false
-  },
+  //stretch goal 
+  //title : { type: Boolean, default: false },
   eventYear: {
     type: Number
   },
-  reviews: [reviewSchema],
+  rating: {
+    type: String,
+    enum: [
+      "1", "2", "3", "4", "5"
+      ]
+  },
   owner: {
     type: Schema.Types.ObjectId, 
     ref: 'Profile'

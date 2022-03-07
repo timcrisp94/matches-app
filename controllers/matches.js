@@ -19,8 +19,8 @@ function newMatch(req, res) {
 }
 
 function create(req, res) {
-  console.log(req.body)
   const match = new Match(req.body)
+  console.log(req.body.wrestlers)
   match.save(function(err) {
     if (err) {
       console.log(err)
@@ -28,7 +28,7 @@ function create(req, res) {
     } 
     console.log(match)
     console.log(err)
-    res.redirect('/matches/new')
+    res.redirect(`/matches/${match._id}`)
   })
 }
 

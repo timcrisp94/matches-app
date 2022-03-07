@@ -8,7 +8,7 @@ const wrestlerSchema = new Schema({
     required: true,
     unique: true
   },   
-  matches: {ObjectId, ref: 'Matches'}
+  //matches: {ObjectId, ref: 'Match'}
 })
 
 const Wrestler = mongoose.model('Wrestler', wrestlerSchema)

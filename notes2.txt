@@ -586,3 +586,49 @@ With embedding, parent documents hold subdocuments. Using referencing, a documen
 
 populate
 
+mongoose movies
+
+const matchSchema = new Schema ({
+  wrestlers: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Wrestler'
+  }],
+  company: {
+    type: String,
+    required: true
+  }, 
+  event: {
+    type: String,
+    required: true
+  },
+  forTitle : {
+    type: Boolean,
+    default: false
+  },
+  eventYear: {
+    type: Number
+  },
+  reviews: [reviewSchema],
+  owner: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Profile'
+  },
+}, {
+  timestamps: true
+})
+
+Button in views/matches/index to /matches/new
+
+*stretch goal* For title? view
+<label for="title-checkbox">For Title?</label>
+<input
+  type="checkbox"
+  name="title"
+  !checked
+  id="title-checkbox"
+/>
+
+Add Wrestler
+
+Five Easy Steps
+Get wrestlers/new

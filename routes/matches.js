@@ -9,7 +9,7 @@ router.get('/', matchesCtrl.index)
 router.get('/new', matchesCtrl.new)
 // GET - localhost: 3000/matches/:id
 router.get('/:id', matchesCtrl.show)
-// GET - localhost:3000/matches/:id/edit
+// GET - localhost:3000/matches/:id/edi
 router.get('/:id/edit', matchesCtrl.edit)
 
 // POST - localhost:3000/matches/

@@ -4,24 +4,44 @@
 
 
 <main>
-  <h1>title</h1>
+  <h1>Add a Match</h1>
   <form id="new-form" action="/matches" method="POST">
-     <label for="event-input">Event:</label>
+    <label for="wrestlers-input">Wrestler:</label>
     <input 
       type="text" 
-      name="event" 
-      id="event-input">
-    <label for="event-year-input">Event Year:</label>
+      name="wrestlers" 
+      id="wrestlers-input">
+    <label for="wrestlers-input">Wrestler:</label>
+    <input 
+        type="text" 
+        name="wrestlers" 
+        id="wrestlers-input">
+    <button type="submit">Add Another?</button>
+    <label for="event-year-input">Company:</label>
     <input 
       type="text" 
-      name="eventYear"    
-      id="event-year-input"
+      name="company"    
+      id="company-input"
     >
-    <label for="company-input">Company:</label>
+    <label for="event-input">Event:</label>
     <input
       type= "text" 
-      name="company"       
-      id="company">
+      name="event"       
+      id="event-input">
+    <label for="event-year-input">Year:</label>
+    <input 
+      type="number"
+      name="eventYear"
+      id="event-year-input"
+    />
+    <label for="rating-select">Rating:</label>
+    <select name="rating" id="rating-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
     <button type="submit">Save Match</button>
   </form>
 </main>

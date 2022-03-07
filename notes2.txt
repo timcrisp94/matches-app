@@ -631,4 +631,22 @@ Button in views/matches/index to /matches/new
 Add Wrestler
 
 Five Easy Steps
-Get wrestlers/new
+1. Determine the restful route
+2. Add the UI that triggers the http request that matches the Route
+3. Define the route and map it to the controller method
+4. Add the controller method and export it
+5. In the controller, perform the necessary crud then render or redirect. If render, code the view template if necessary
+
+Removed this form from <form id="add-wrestlers" action="/wrestlers" method="POST">
+      <label for="wrestlers-input">Wrestler:</label>
+      <input 
+      type="text" 
+      name="wrestlers" 
+      id="wrestlers-input">
+      <label for="wrestlers-input">Wrestler:</label>
+      <input 
+        type="text" 
+        name="wrestlers" 
+        id="wrestlers-input">
+      <button type="submit">Add Another?</button>
+    </form>

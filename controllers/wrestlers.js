@@ -12,7 +12,7 @@ function newWrestler(req, res) {
 function create(req, res) {
   Wrestler.create(req.body, function (err, wrestler) {
     console.log(req.body)
-    res.redirect('/wrestlers/new')
+     res.redirect('/wrestlers/new')
   })
 }
 

@@ -1,4 +1,5 @@
 import { Match } from '../models/match.js'
+import { Wrestler } from '../models/wrestler.js'
 
 function index(req, res) {
   Match.find({})
@@ -34,17 +35,24 @@ function create(req, res) {
 
 function show(req, res) {
   Match.findById(req.params.id)
-  .populate("owner")
-  .then(match => {
-    console.log(match)
-    res.render('matches/show', {
-      match,
-      title: "show"
+  .populate("wrestlers")
+  .exec(function(err, match) {
+    Wrestler.find({_id: {$nin: match.wrestlers}}, 
+      function(err, wrestlers) {
+        res.render('matches/show', {
+          title: 'Match Details',
+          match      
+      })
     })
   })
-  .catch(err => {
-    console.log(err)
-    res.redirect('/matches')
+}
+  
+function addToMatch(req, res) {
+  Match.findById(req.params.id, function(err, match) {
+    match.wrestlers.push(req.body.wrestlerId)
+    match.save(function(err) {
+      res.redirect(`/matches/${match._id}`)
+    })
   })
 }
 
@@ -86,6 +94,7 @@ export {
   show,
   deleteMatch as delete,
   edit,
-  update
+  update,
+  addToMatch,
 }
 

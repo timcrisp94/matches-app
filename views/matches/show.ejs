@@ -12,8 +12,16 @@
     <div>Release Year: </div>
     <div><%= match.eventYear %></div>
     <div>Wrestlers: </div>
-    <div><%= match.wrestlers.join(', ') %></div>
-    <div>
+      <div>
+      <form id="add-wrestler-to-match" 
+      action="/matches/<%= match._id %>/wrestlers" method="POST">
+        <select name="wrestlerId">
+          <% match.wrestlers.forEach(wrestler => { %>
+            <option value="<%= wrestler._id %>"><%= wrestler.name %></option>
+          <% }) %>
+        </select><br>
+        <button type="submit">Add to Match</button>
+      </form>
       <form action="/matches/<%= match._id %>/edit"
         method="GET">
       <button class="btn" type="submit">Edit Match</button>

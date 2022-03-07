@@ -15,6 +15,7 @@ router.get('/:id/edit', matchesCtrl.edit)
 // POST - localhost:3000/matches/
 router.post('/', matchesCtrl.create)
 
+router.post('/:id/wrestlers', matchesCtrl.addToMatch);
 // PUT - localhost:3000/matches/:id
   router.put(":/id", matchesCtrl.update)
 

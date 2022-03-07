@@ -11,20 +11,30 @@ const reviewSchema = new Schema({
 
 
 const matchSchema = new Schema ({
+  wrestlers: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Wrestler'
+  }],
+  company: {
+    type: String,
+    required: true
+  }, 
   event: {
     type: String,
     required: true
   },
+  forTitle : {
+    type: Boolean,
+    default: false
+  },
   eventYear: {
     type: Number
   },
-  company: {
-    type: String,
-    required: true
-  },  
-  // wrestlers: [{type: Schema.Types.ObjectId, ref: 'Wrestler'}],
-  // reviews: [reviewSchema]
-  // owner: {type: Schema.Types.ObjectId, ref: 'Profile'},
+  reviews: [reviewSchema],
+  owner: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Profile'
+  },
 }, {
   timestamps: true
 })
@@ -35,4 +45,3 @@ export {
   Match
 }
 
-// GET /matches

@@ -71,9 +71,9 @@ function addToMatch(req, res) {
 }
 
 function edit(req, res) {
-  Match.findById(req.params.id, function(err, movie) {
+  Match.findById(req.params.id, function(err, match) {
     res.render('matches/edit', {
-      movie,
+      match,
       err,
       title: "Edit Match"
     })

@@ -654,3 +654,27 @@ Removed this form from <form id="add-wrestlers" action="/wrestlers" method="POST
 GET / matches/match._id
 
 add option values to add wrestler forms
+
+aau i want to edit a match
+get - portion complete
+
+1. put localhost3000 matches/:id
+2. edit button
+3.
+
+
+Pulled from edit form <label for="wrestler-one-input">Wrestlers:</label>
+    <input 
+    type="text"
+    name="wrestlerOneId"
+    <%= match.wrestler.name %> 
+    id="wrestler-one-input"
+    />
+    <label for="wrestler-two-input"></label>
+    <input 
+    type="text"
+    name="wrestlerTwoId"
+    <%= match.wrestler.name %> 
+    id="wrestler-two-input"
+    />
+

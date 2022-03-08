@@ -5,33 +5,38 @@
 
 
 <main>
-  <h1><%= title %></h1>
-  <form id="new-form" action="/matches/<%= match._id %>?_method=PUT" method="POST">
-    <label for="title-input">Title:</label>
+  <h1>edit</h1>
+  <form id="edit-form" 
+    action="/matches/<%= match._id %>?_method=PUT" 
+    method="POST">
+    <label for="event-company-input">Company:</label>
     <input 
       type="text" 
-      name="title" 
-      value="<%= match.name %>" 
-      id="title-input">
-    <label for="event-input">Event:</label>
-    <input 
-      type="text" 
-      name="event" 
-      value="<%= event.name %>"
-      id="event-input">
-    <label for="event-year-input">Event Year:</label>
-    <input 
-      type="text" 
-      name="eventYear"
-      value="<%= movie.eventYear %>"
-      id="event-year-input"
+      name="company"
+      value=<%= match.company %>  
+      id="company-input"
     >
-    <label for="company-input">Company:</label>
+    <label for="event-input">Event:</label>
     <input
       type= "text" 
-      name="company" 
-      value="<%= match.company %>" 
-      id="company">
+      name="event"
+      value=<%= match.event %>       
+      id="event-input">
+    <label for="event-year-input">Year:</label>
+    <input 
+      type="number"
+     name="eventYear"
+     value="<%= match.year %>" 
+      id="event-year-input"
+    />
+    <label for="rating-select">Rating:</label>
+    <select name="rating" id="rating-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
     <button type="submit">Save Match</button>
   </form>
 </main>

@@ -3,7 +3,7 @@
 <%- include('../partials/nav') %>
 
 <main>
-  <h1><%= match.name %></h1>
+  <h1>New Match</h1>
   <section>
     <div>Company: <%= match.company %></div>
     <div>Event: <%= match.event %></div>
@@ -23,17 +23,15 @@
           <% wrestlers.forEach(function(wrestler) { %>
             <option value="<%= wrestler.id %>"><%= wrestler.name %></option>
           <% }) %>
-        </select><br>
-      <button type="submit">Add to Match</button>
+        </select>
+        <button type="submit">Add to Match</button>
     </form>
-    <form id="add-wrestler-to-match" 
-      action="/matches/<%= match._id %>/wrestlers" method="POST">
-        <select name="wrestlerOneId">
+        <select name="wrestlerTwoId">
           <% wrestlers.forEach(function(wrestler) { %>
             <option value="<%= wrestler.id %>"><%= wrestler.name %></option>
           <% }) %>
-        </select><br>
-      <button type="submit">Add to Match</button>
+        </select>
+        <button type="submit">Add to Match</button>
     </form>
     <label for="rating-select">Rating:</label>
     <select name="rating" id="rating-select">

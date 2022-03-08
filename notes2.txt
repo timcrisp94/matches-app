@@ -650,3 +650,7 @@ Removed this form from <form id="add-wrestlers" action="/wrestlers" method="POST
         id="wrestlers-input">
       <button type="submit">Add Another?</button>
     </form>
+
+GET / matches/match._id
+
+add option values to add wrestler forms

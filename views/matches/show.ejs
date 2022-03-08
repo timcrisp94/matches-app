@@ -19,17 +19,21 @@
   <section>
     <form id="add-wrestler-to-match" 
       action="/matches/<%= match._id %>/wrestlers" method="POST">
-        <select name="wrestlerId">
+        <select name="wrestlerOneId">
           <% wrestlers.forEach(function(wrestler) { %>
-            <option><%= wrestler.name %></option>
+            <option value="<%= wrestler.id %>"><%= wrestler.name %></option>
           <% }) %>
         </select><br>
-        <select name="wrestlerId">
+      <button type="submit">Add to Match</button>
+    </form>
+    <form id="add-wrestler-to-match" 
+      action="/matches/<%= match._id %>/wrestlers" method="POST">
+        <select name="wrestlerOneId">
           <% wrestlers.forEach(function(wrestler) { %>
-            <option><%= wrestler.name %></option>
+            <option value="<%= wrestler.id %>"><%= wrestler.name %></option>
           <% }) %>
-        </select>
-        <button type="submit">Add to Match</button>
+        </select><br>
+      <button type="submit">Add to Match</button>
     </form>
     <label for="rating-select">Rating:</label>
     <select name="rating" id="rating-select">

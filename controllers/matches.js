@@ -59,10 +59,10 @@ function show(req, res) {
 // }
 
 function addToMatch(req, res) {
-  Match.findById(req.params.id)
-   .populate('wrestlers')   
-   .then(match => {
-    match.wrestlers.push(req.body.wrestlerId)
+  Match.findById(req.params.id).then(match => {
+    console.log(req.body)
+    match.wrestlers.push(req.body.wrestlerOneId)
+    match.wrestlers.push(req.body.wrestlerTwoId)
     match.save()
     console.log(match)
     }).then(() => {

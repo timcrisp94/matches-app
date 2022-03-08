@@ -48,13 +48,26 @@ function show(req, res) {
   })
 }
   
+// function addToMatch(req, res) {
+//   Match.findById(req.params.id, function(err, match) {
+//     console.log('this is the match', match)
+//     match.wrestlers.push(req.body.wrestlerId)
+//     match.save(function(err) {
+//       res.redirect(`/matches/${req.params.id}`)
+//     })
+//   })
+// }
+
 function addToMatch(req, res) {
-  Match.findById(req.params.id, function(err, match) {
+  Match.findById(req.params.id)
+   .populate('wrestlers')   
+   .then(match => {
     match.wrestlers.push(req.body.wrestlerId)
-    match.save(function(err) {
-      res.redirect(`/matches/${match._id}`)
-    })
-  })
+    match.save()
+    console.log(match)
+    }).then(() => {
+    res.redirect(`/matches/${req.params.id}`)
+  })  
 }
 
 function edit(req, res) {

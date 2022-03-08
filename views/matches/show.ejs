@@ -24,8 +24,21 @@
             <option><%= wrestler.name %></option>
           <% }) %>
         </select><br>
+        <select name="wrestlerId">
+          <% wrestlers.forEach(function(wrestler) { %>
+            <option><%= wrestler.name %></option>
+          <% }) %>
+        </select>
         <button type="submit">Add to Match</button>
     </form>
+    <label for="rating-select">Rating:</label>
+    <select name="rating" id="rating-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
     <form action="/matches/<%= match._id %>/edit"
         method="GET">
       <button class="btn" type="submit">Edit Match</button>

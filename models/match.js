@@ -2,10 +2,10 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const reviewSchema = new Schema({
-  content: String,
-  rating: {type: Number, min: 1, max: 5, default: 5}
-}, {
+const ratingSchema = new Schema({
+  rating: { type: String,
+  enum: ["1", "2", "3", "4", "5"]
+}}, {
   timestamps: true
 })
 
@@ -28,12 +28,7 @@ const matchSchema = new Schema ({
   eventYear: {
     type: Number
   },
-  rating: {
-    type: String,
-    enum: [
-      "1", "2", "3", "4", "5"
-      ]
-  },
+  rating: [ratingSchema], 
   owner: {
     type: Schema.Types.ObjectId, 
     ref: 'Profile'

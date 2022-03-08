@@ -667,14 +667,28 @@ Pulled from edit form <label for="wrestler-one-input">Wrestlers:</label>
     <input 
     type="text"
     name="wrestlerOneId"
-    <%= match.wrestler.name %> 
+    value=<%= match.wrestler.name %> 
     id="wrestler-one-input"
     />
     <label for="wrestler-two-input"></label>
     <input 
     type="text"
     name="wrestlerTwoId"
-    <%= match.wrestler.name %> 
+    value=<%= match.wrestler.name %> 
     id="wrestler-two-input"
     />
 
+To do:
+  -ratings
+  -display wrestler names
+  -google sign in
+
+  Ratings
+1. Determine the restful route
+2. Add the UI that triggers the http request that matches the Route
+3. Define the route and map it to the controller method
+4. Add the controller method and export it
+5. In the controller, perform the necessary crud then render or redirect. If render, code the view template if necessary
+
+
+`${match.wrestlers[0].name} vs. ${match.wrestlers[1].name}` 

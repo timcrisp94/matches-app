@@ -47,16 +47,6 @@ function show(req, res) {
     })
   })
 }
-  
-// function addToMatch(req, res) {
-//   Match.findById(req.params.id, function(err, match) {
-//     console.log('this is the match', match)
-//     match.wrestlers.push(req.body.wrestlerId)
-//     match.save(function(err) {
-//       res.redirect(`/matches/${req.params.id}`)
-//     })
-//   })
-// }
 
 function addToMatch(req, res) {
   Match.findById(req.params.id).then(match => {
@@ -68,6 +58,22 @@ function addToMatch(req, res) {
     }).then(() => {
     res.redirect(`/matches/${req.params.id}`)
   })  
+}
+
+// function createRating(req, res) {
+//   Match.findById(req.params.id, function(err, match) {
+//     match.
+//   })
+// }
+
+function createRating(req, res) {
+  Match.findById(req.params.id, function(err, match) {
+    match.rating.push(req.body)
+    console.log(req.body)
+    match.save(function(err) {
+      res.redirect(`/matches/${match._id}`)
+    })
+  })
 }
 
 function edit(req, res) {
@@ -110,5 +116,6 @@ export {
   edit,
   update,
   addToMatch,
+  createRating
 }
 

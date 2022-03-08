@@ -4,10 +4,11 @@
 
 <main>
   <h1>New Match</h1>
-  <section>
+   <section>
     <div>Company: <%= match.company %></div>
     <div>Event: <%= match.event %></div>
     <div>Release Year: <%= match.eventYear %></div>
+    <div>Rating: <%= match.rating %>  </div>
     <div>Wrestlers:
       <ul>
         <% match.wrestlers.forEach(wrestler => { %>
@@ -26,6 +27,8 @@
         </select>
         <button type="submit">Add to Match</button>
     </form>
+    <form id="add-wrestler-to-match" 
+      action="/matches/<%= match._id %>/wrestlers" method="POST">
         <select name="wrestlerTwoId">
           <% wrestlers.forEach(function(wrestler) { %>
             <option value="<%= wrestler.id %>"><%= wrestler.name %></option>
@@ -33,14 +36,21 @@
         </select>
         <button type="submit">Add to Match</button>
     </form>
+    <form 
+    action="/matches/<%= match._id %>/ratings"
+    id="add-rating-form"
+    method="POST"
+    >
     <label for="rating-select">Rating:</label>
-    <select name="rating" id="rating-select">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
+        <select name="rating" id="rating-select">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      <button type="submit">Save Review</button>
+    </form>  
     <form action="/matches/<%= match._id %>/edit"
         method="GET">
       <button class="btn" type="submit">Edit Match</button>
@@ -51,9 +61,10 @@
     </form>
     </div>
     </section>
-</main>
+  </main>
 
 
 
 
 <%- include('../partials/footer') %>
+

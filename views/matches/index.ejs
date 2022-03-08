@@ -2,18 +2,29 @@
 <link rel="stylesheet" href="/stylesheets/main.css">
 <%- include('../partials/nav') %>
 
-<section>
-  <h1>Matches</h1>
-  <h2>My Matches</h2>
-  <ul>
-    <% matches.forEach(match => { %>
-      <li>
-        <a href="/matches/<%= match._id %>"><%= match.name %></a> 
-      </li>
-    <% }) %>
-  </ul>
-  <a href="/matches/new">Add Match</a>
-</section>
+<main>
+  <h1>My Matches</h1>
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Event</th>
+        <th>Year</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% matches.forEach(match => { %>
+        <tr>
+          <td><%= match.company %></td>
+          <td><%= match.event %></td>
+          <td><%= match.year %> </td>
+          <td><a href="/matches/<%= match._id %>">DETAILS</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</main>
 
 
 <%- include('../partials/footer') %>

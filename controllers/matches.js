@@ -41,7 +41,8 @@ function show(req, res) {
       function(err, wrestlers) {
         res.render('matches/show', {
           title: 'Match Details',
-          match      
+          match,
+          wrestlers      
       })
     })
   })

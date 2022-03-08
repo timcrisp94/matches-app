@@ -5,24 +5,28 @@
 <main>
   <h1><%= match.name %></h1>
   <section>
-    <div>Company: </div>
-    <div><%= match.company %></div>
-    <div>Event: </div>
-    <div><%= match.event %></div>
-    <div>Release Year: </div>
-    <div><%= match.eventYear %></div>
-    <div>Wrestlers: </div>
-      <div>
-      <form id="add-wrestler-to-match" 
+    <div>Company: <%= match.company %></div>
+    <div>Event: <%= match.event %></div>
+    <div>Release Year: <%= match.eventYear %></div>
+    <div>Wrestlers:
+      <ul>
+        <% match.wrestlers.forEach(wrestler => { %>
+          <li><%= wrestler.name %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </section>
+  <section>
+    <form id="add-wrestler-to-match" 
       action="/matches/<%= match._id %>/wrestlers" method="POST">
         <select name="wrestlerId">
-          <% match.wrestlers.forEach(wrestler => { %>
-            <option value="<%= wrestler._id %>"><%= wrestler.name %></option>
+          <% wrestlers.forEach(function(wrestler) { %>
+            <option><%= wrestler.name %></option>
           <% }) %>
         </select><br>
         <button type="submit">Add to Match</button>
-      </form>
-      <form action="/matches/<%= match._id %>/edit"
+    </form>
+    <form action="/matches/<%= match._id %>/edit"
         method="GET">
       <button class="btn" type="submit">Edit Match</button>
     </form>
@@ -30,7 +34,6 @@
       <form action="/matches/<%= match._id %>?_method=DELETE" method="POST">
       <button>Delete Match</button>
     </form>
-
     </div>
     </section>
 </main>

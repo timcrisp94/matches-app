@@ -3,9 +3,9 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const ratingSchema = new Schema({
-  rating: { type: String,
-  enum: ["1", "2", "3", "4", "5"]
-}}, {
+  rating: {type: Number, min: 1, max: 5, default:3}
+  // enum: ["1", "2", "3", "4", "5"]
+}, {
   timestamps: true
 })
 

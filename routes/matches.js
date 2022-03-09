@@ -20,7 +20,7 @@ router.post('/:id/wrestlers', matchesCtrl.addToMatch)
 router.post('/:id/ratings', matchesCtrl.createRating)
 
 // PUT - localhost:3000/matches/:id
-  router.put("/:id", matchesCtrl.update)
+router.put("/:id", matchesCtrl.update)
 
 
 

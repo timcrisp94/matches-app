@@ -8,7 +8,7 @@
     <div>Company: <%= match.company %></div>
     <div>Event: <%= match.event %></div>
     <div>Release Year: <%= match.eventYear %></div>
-    <div>Rating: <%= match.rating %>  </div>
+    <div>Rating </div>
     <div>Wrestlers:
       <ul>
         <% match.wrestlers.forEach(wrestler => { %>
@@ -36,6 +36,10 @@
         </select>
         <button type="submit">Add to Match</button>
     </form>
+  <h2>Rating</h2>
+    <% match.rating.forEach(function(rating) { %>
+    <div><%= rating.rating %> </div>
+    <% }) %> 
     <form 
     action="/matches/<%= match._id %>/ratings"
     id="add-rating-form"
@@ -45,11 +49,11 @@
         <select name="rating" id="rating-select">
           <option value="1">1</option>
           <option value="2">2</option>
-          <option value="3">3</option>
+          <option value="3" selected>3</option>
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-      <button type="submit">Save Review</button>
+      <button type="submit">Save Rating</button>
     </form>  
     <form action="/matches/<%= match._id %>/edit"
         method="GET">

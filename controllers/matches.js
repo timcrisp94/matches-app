@@ -69,7 +69,7 @@ function addToMatch(req, res) {
 function createRating(req, res) {
   Match.findById(req.params.id, function(err, match) {
     match.rating.push(req.body)
-    console.log(req.body)
+    console.log(req.body.rating)
     match.save(function(err) {
       res.redirect(`/matches/${match._id}`)
     })
@@ -78,6 +78,7 @@ function createRating(req, res) {
 
 function edit(req, res) {
   Match.findById(req.params.id, function(err, match) {
+    console.log(match)
     res.render('matches/edit', {
       match,
       err,
@@ -87,9 +88,12 @@ function edit(req, res) {
 }
 
 function update(req, res){
-  Match.findByIdAndUpdate(req.params.id, 
+  console.log('id', req.params.id)
+  Match.findById(req.params.id, 
     req.body, function(err, match) { 
-      res.redirect(`/matches/${matches._id}`)
+      console.log(req.body)
+      console.log('hi', match)
+      res.redirect(`/matches/${match._id}`)
   }) 
 }
 

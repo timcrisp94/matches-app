@@ -4,6 +4,33 @@ div {
   font-size: 2.4rem;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem
+}
+
+form * {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 2rem;
+  
+}
+
+form > button {
+  font-size: 1.6rem;
+  width: 16rem;
+  margin-top: 2.4rem;
+  margin-left: 40px;
+} 
+
+select {
+  font-size: 18px;
+  padding: 9px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
 #edit-delete {
   margin-top: 20px;
   display: flex;

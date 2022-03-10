@@ -1,5 +1,5 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/main.css">
+<link rel="stylesheet" href="/stylesheets/matches/index.css">
 <%- include('../partials/nav') %>
 
 <main>
@@ -8,8 +8,8 @@
     <thead>
       <tr>
         <th>Company</th>
+        <th>Match</th>
         <th>Event</th>
-        <th>Year</th>
         <th></th>
       </tr>
     </thead>
@@ -17,8 +17,8 @@
       <% matches.forEach(match => { %>
         <tr>
           <td><%= match.company %></td>
+          <td><%= match.bout %></td>
           <td><%= match.event %></td>
-          <td><%= match.year %> </td>
           <td><a href="/matches/<%= match._id %>">DETAILS</a></td>
         </tr>
       <% }) %>

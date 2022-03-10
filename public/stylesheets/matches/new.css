@@ -1,0 +1,9 @@
+form, .form-fiels {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+button {
+  margin: 20px;
+}

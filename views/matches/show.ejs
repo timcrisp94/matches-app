@@ -1,14 +1,13 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/main.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
 <%- include('../partials/nav') %>
 
 <main>
-  <h1>New Match</h1>
+  <h1><%= match.bout %></h1>
    <section>
-    <div>Bout: <%= match.bout %> </div>
-    <div>Company: <%= match.company %></div>
-    <div>Event: <%= match.event %></div>
-    <div>Release Year: <%= match.eventYear %></div>
+    <div> <%= match.company %></div>
+    <div> <%= match.event %></div>
+    <div> <%= match.eventYear %></div>
     <div>Rating </div>
     <div>Wrestlers:
       <ul>

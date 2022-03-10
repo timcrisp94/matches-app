@@ -4,14 +4,13 @@
 
 <main>
 	<h1>Add a Wrestler</h1>
-  <p>Please first ensure that the wrestler is not in the dropdown
-    <select>
+  <h4>Ensure that the wrestler is not in the dropdown</h3>
+    <select id="wrestlers">
       <% wrestlers.forEach(function(wrestler) { %>
         <option><%= wrestler.name %></option>
       <% }) %>
     </select>
-  </p>
-  <form id="add-wrestler-form" action="/wrestlers" method="POST">
+   <form id="add-wrestler-form" action="/wrestlers" method="POST">
     <label for="name-input">Name:</label>
     <input type="text" name="name" id="name-input">
     <button type="submit">Add Wrestler</button>

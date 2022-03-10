@@ -6,22 +6,33 @@
 <main>
   <h1>Add a Match</h1>
   <form id="new-form" action="/matches" method="POST">
+    <label for="bout-input">Bout:</label>
+    <input
+      type="text"
+      name="bout"
+      id="bout-input"
+      placeholder="Kazuchika Okada vs. Kenny Omega"
+    >
     <label for="event-company-input">Company:</label>
     <input 
       type="text" 
       name="company"    
       id="company-input"
+      placeholder="NJPW"
     >
     <label for="event-input">Event:</label>
     <input
       type= "text" 
       name="event"       
-      id="event-input">
+      id="event-input"
+      placeholder="Dominion 6.9"
+    >
     <label for="event-year-input">Year:</label>
     <input 
       type="number"
       name="eventYear"
       id="event-year-input"
+      placeholder="2018"
     />
     <button type="submit">Save Match</button>
   </form>

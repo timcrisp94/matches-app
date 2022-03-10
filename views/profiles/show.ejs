@@ -11,7 +11,13 @@
       >
     </div>
   <% } %>
-  <h1>It's <%= isSelf ? "you" : profile.name %>!</h1>
+    <% matches.forEach(match => { %>
+      <%= match.bout %>
+      <%= match.rating %>
+           
+      <%  }) %>
+
+
 </main>
 
 <%- include('../partials/footer') %>

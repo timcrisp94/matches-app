@@ -1,5 +1,6 @@
 import { Match } from '../models/match.js'
 import { Wrestler } from '../models/wrestler.js'
+import { Profile } from '../models/profile.js'
 
 function index(req, res) {
   Match.find({})
@@ -20,18 +21,24 @@ function newMatch(req, res) {
 }
 
 function create(req, res) {
-  const match = new Match(req.body)
-  console.log(req.body.wrestlers)
-  match.save(function(err) {
-    if (err) {
-      console.log(err)
-      return res.redirect('/matches/new')
-    } 
-    console.log(match)
+  req.body.creator = req.user.profile._id
+  console.log(req.body)
+  Match.create(req.body)
+  .then(match => {
+    Profile.findById(req.user.profile._id)
+    .then(profile => {
+      console.log("this is the match", match)
+      profile.matches.push(match)
+      profile.save()
+      res.redirect(`/matches/${match._id}`)
+    })
+  })  
+  .catch(err => {
     console.log(err)
-    res.redirect(`/matches/${match._id}`)
+    res.redirect('/matches')
   })
-}
+ }
+
 
 function show(req, res) {
   Match.findById(req.params.id)
@@ -60,22 +67,23 @@ function addToMatch(req, res) {
   })  
 }
 
-// function createRating(req, res) {
-//   Match.findById(req.params.id, function(err, match) {
-//     match.
-//   })
-// }
+ 
+
 
 function createRating(req, res) {
-  Match.findById(req.params.id, function(err, match) {
+  Match.findById(req.params.id)
+  .then(match => {
     match.rating.push(req.body)
-    console.log(req.body.rating)
-    match.save(function(err) {
+    match.save()
+    .then(() => {
       res.redirect(`/matches/${match._id}`)
     })
   })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/matches")
+  })
 }
-
 function edit(req, res) {
   Match.findById(req.params.id, function(err, match) {
     console.log(match)

@@ -3,14 +3,21 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const ratingSchema = new Schema({
-  rating: {type: Number, min: 1, max: 5, default:3}
-  // enum: ["1", "2", "3", "4", "5"]
+  rating: {type: Number, min: 1, max: 5, default:3},
+  owner: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Profile'
+  },
+  
 }, {
   timestamps: true
 })
 
 
 const matchSchema = new Schema ({
+  bout: [{
+    type: String
+  }],
   wrestlers: [{
     type: Schema.Types.ObjectId, 
     ref: 'Wrestler'
@@ -23,9 +30,7 @@ const matchSchema = new Schema ({
     type: String,
     required: true
   },
-  //stretch goal 
-  //title : { type: Boolean, default: false },
-  eventYear: {
+   eventYear: {
     type: Number
   },
   rating: [ratingSchema], 

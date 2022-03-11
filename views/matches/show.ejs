@@ -4,27 +4,27 @@
 
 <main>
   <h1><%= match.bout %></h1>
-   <section>
-    <div> <%= match.company %></div>
-    <div> <%= match.event %></div>
-    <div> <%= match.eventYear %></div>
-    <div>
-      <ul>
+  <section>
+    <div><%= match.company %></div>
+    <div><%= match.event %></div>
+    <div><%= match.eventYear %></div>
+    <ul>
         <% match.wrestlers.forEach(wrestler => { %>
           <li><%= wrestler.name %></li>
         <% }) %>
-      </ul>
+    </ul>
     </div>
   </section>
   <section>
     <form id="add-wrestler-to-match" 
-      action="/matches/<%= match._id %>/wrestlers" method="POST">
+      action="/matches/<%= match._id %>/wrestlers" 
+      method="POST">
         <select name="wrestlerOneId">
           <% wrestlers.forEach(function(wrestler) { %>
             <option value="<%= wrestler.id %>"><%= wrestler.name %></option>
           <% }) %>
         </select>
-        <button type="submit">Add to Match</button>
+      <button type="submit">Add to Match</button>
     </form>
   </section> 
   <section class="ratings"></section> 
@@ -33,9 +33,8 @@
     <%= rating.rating %>/5</h2>
     <% }) %> 
   </h2>
-    <form 
+    <form id="add-rating-form"
     action="/matches/<%= match._id %>/ratings"
-    id="add-rating-form"
     method="POST"
     >
     <label for="rating-select">Rating:</label>
@@ -54,13 +53,12 @@
         method="GET">
       <button type="submit">Edit Match</button>
     </form>
-    <form action="/matches/<%= match._id %>?_method=DELETE" method="POST">
+    <form action="/matches/<%= match._id %>?_method=DELETE" 
+        method="POST">
       <button type="submit">Delete Match</button>
     </form>
-   </section>
-  </main>
-
-
+  </section>
+</main>
 
 
 <%- include('../partials/footer') %>

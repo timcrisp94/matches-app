@@ -26,18 +26,9 @@
         </select>
         <button type="submit">Add to Match</button>
     </form>
-    <form id="add-wrestler-to-match" 
-      action="/matches/<%= match._id %>/wrestlers" method="POST">
-        <select name="wrestlerTwoId">
-          <% wrestlers.forEach(function(wrestler) { %>
-            <option value="<%= wrestler.id %>"><%= wrestler.name %></option>
-          <% }) %>
-        </select>
-        <button type="submit">Add to Match</button>
-    </form>
   </section> 
   <section class="ratings"></section> 
-  <h2>Rating
+  <h2>
     <% match.rating.forEach(function(rating) { %>
     <%= rating.rating %>/5</h2>
     <% }) %> 

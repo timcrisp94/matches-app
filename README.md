@@ -4,7 +4,8 @@
 
 Matches is an application where users can log and rate the professional wrestling matches they watch. The url is a tip of the hat to French literary theorist Roland Barthes, and his 1957 essay "The World of Wrestling."
 
-*The virture of all-in wrestling is that it is the spectacle of excess.* -Barthes (*Mythologies*)
+*"The virture of all-in wrestling is that it is the spectacle of excess."* 
+-Barthes (from *Mythologies*)
 
 Get excessive, rate some matches here: 
 
@@ -39,6 +40,7 @@ https://trello.com/b/sRnIO0BE/unit-2-project-matches
 + General Assembly e-gen-replacement repo
 + Background via Hero Patterns https://heropatterns.com/
 + Monoton Cursive Font via https://fonts.google.com/specimen/Monoton
++ The incomporable Roland Barthes https://www.amazon.com/Barthes-Reader-Roland/dp/0374521441
 
 ## Icebox
 + Integrate API so that users may choose wrestlers and events from a database

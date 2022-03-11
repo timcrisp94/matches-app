@@ -23,11 +23,8 @@ router.post('/:id/ratings', isLoggedIn, matchesCtrl.createRating)
 // PUT - localhost:3000/matches/:id
 router.put("/:id", matchesCtrl.update)
 
-
-
 // DELETE - localhost:3000/matches/:id
 router.delete('/:id', matchesCtrl.delete)
-
 
 export {
   router

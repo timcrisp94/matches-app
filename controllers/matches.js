@@ -37,7 +37,7 @@ function create(req, res) {
     console.log(err)
     res.redirect('/matches')
   })
- }
+}
 
 
 function show(req, res) {
@@ -67,9 +67,6 @@ function addToMatch(req, res) {
   })  
 }
 
- 
-
-
 function createRating(req, res) {
   Match.findById(req.params.id)
   .then(match => {
@@ -84,6 +81,7 @@ function createRating(req, res) {
     res.redirect("/matches")
   })
 }
+
 function edit(req, res) {
   Match.findById(req.params.id, function(err, match) {
     console.log(match)

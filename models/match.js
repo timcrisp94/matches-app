@@ -13,7 +13,6 @@ const ratingSchema = new Schema({
   timestamps: true
 })
 
-
 const matchSchema = new Schema ({
   bout: [{
     type: String
@@ -30,7 +29,7 @@ const matchSchema = new Schema ({
     type: String,
     required: true
   },
-   eventYear: {
+  eventYear: {
     type: Number
   },
   rating: [ratingSchema], 

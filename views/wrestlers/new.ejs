@@ -10,8 +10,13 @@
         <option><%= wrestler.name %></option>
       <% }) %>
     </select>
-   <form id="add-wrestler-form" action="/wrestlers" method="POST">
-    <input type="text" name="name" placeholder="name" id="name-input"><br>
+  <form id="add-wrestler-form" 
+    action="/wrestlers" 
+    method="POST">
+      <input type="text" 
+        name="name" 
+        placeholder="name"       
+        id="name-input"><br>
     <button type="submit">Add Wrestler</button>
   </form>
 </main>

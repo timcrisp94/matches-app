@@ -1,7 +1,6 @@
 import { Profile } from "../models/profile.js"
 import { Match } from '../models/match.js'
 
-
 function index(req, res) {
   Profile.find({})
   .then(profiles => {
@@ -38,9 +37,6 @@ function show(req, res) {
     res.redirect("/")
   })
 }
-
-
-
 
 export {
   index,

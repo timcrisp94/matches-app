@@ -1,5 +1,5 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/style.css">
+<link rel="stylesheet" href="/stylesheets/profiles/show.css">
 <%- include('../partials/nav') %>
 
 <main>
@@ -12,12 +12,24 @@
       >
     </div>
   <% } %>
-    <% matches.forEach(match => { %>
-      <%= match.bout %>
-      <%= match.rating %>
-           
-      <%  }) %>
 
+<% matches.forEach((match, idx) => { %>
+  <% if (match.owner.equals(profile._id)) { %>
+    <table>
+     <tbody>
+          <tr>
+            <td><%= match.bout %></td>
+            <td><%= match.company %></td>
+            <td><%= match.event %></td>
+            <td><%= match.year %> </td>
+            <td><a href="/matches/<%= match._id %>">
+              details</a>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+<% } %>
+<% }) %>
 
 </main>
 

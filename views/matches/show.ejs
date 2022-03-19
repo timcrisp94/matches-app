@@ -48,6 +48,7 @@
       <button type="submit">Save Rating</button>
     </form>  
   </section>
+  <% if (match.owner.equals(user?.profile._id)) { %>    
   <section id="edit-delete">
     <form action="/matches/<%= match._id %>/edit"
         method="GET">
@@ -58,6 +59,7 @@
       <button type="submit">Delete Match</button>
     </form>
   </section>
+  <% } %> 
 </main>
 
 <%- include('../partials/footer') %>

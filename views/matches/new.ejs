@@ -3,6 +3,7 @@
 <%- include('../partials/nav') %>
 
 <main>
+  <% if (user) { %> 
   <h1>Add a Match</h1>
   <form id="new-form" action="/matches" method="POST">
     <label for="bout-input">Bout:</label>
@@ -35,6 +36,7 @@
     />
     <button type="submit">Save Match</button>
   </form>
+  <% } %> 
 </main>
 
 <%- include('../partials/footer') %>

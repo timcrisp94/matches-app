@@ -1,8 +1,9 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose"
+import { isLoggedIn } from '../middleware/middleware.js'
 
 const Schema = mongoose.Schema
 
-const ratingSchema = new Schema({
+const ratingSchema = new Schema ({
   rating: {type: Number, min: 1, max: 5, default:3},
   owner: {
     type: Schema.Types.ObjectId, 
@@ -42,8 +43,10 @@ const matchSchema = new Schema ({
 })
 
 const Match = mongoose.model('Match', matchSchema)
+const Rating = mongoose.model('Rating', ratingSchema)
 
 export {
-  Match
+  Match,
+  Rating
 }
 

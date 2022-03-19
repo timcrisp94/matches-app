@@ -2,6 +2,7 @@ import { Match } from '../models/match.js'
 import { Wrestler } from '../models/wrestler.js'
 import { Profile } from '../models/profile.js'
 
+
 function index(req, res) {
   Match.find({})
   .then(matches => {
@@ -22,7 +23,7 @@ function newMatch(req, res) {
 }
 
 function create(req, res) {
-  req.body.creator = req.user.profile._id
+  req.body.owner = req.user.profile._id
   Match.create(req.body)
   .then(match => {
     res.redirect(`/matches/${match._id}`)
@@ -78,27 +79,25 @@ function createRating(req, res) {
 
 function edit(req, res) {
   Match.findById(req.params.id)
-  .then(match => {
-    if (match.owner.equals(req.user.profile_id)) {
-      match.updateOne(req.body, {new: true})
-      .then(() => {
-        res.redirect('/matches')
-      })
-    } else {
-      throw new Error ("Disqualified!")
-    }
+  .then(match => { 
+    res.render('matches/edit', {
+      match,
+      title: "Edit Match"
+    })
   })
   .catch(err => {
     console.log(err)
     res.redirect('/matches')
-  }) 
+  })
 }
+  
+    
 
 function update(req, res){
   Match.findById(req.params.id)
-  .then(match => {
-    if (match.owner.equals(req.user.profile_id)) {
-      match.updateOne(req.body, {new: true})
+  .then(matches => {
+    if (matches.owner.equals(req.user.profile._id)) {
+        matches.updateOne(req.body, {new: true})
       .then(() => {
         res.redirect('/matches')
       })
@@ -108,25 +107,25 @@ function update(req, res){
   })
   .catch(err => {
     console.log(err)
-    res.redirect('/matches')
-  })  
+    res.redirect("/matches")
+  })
 }
 
 function deleteMatch(req, res) {
   Match.findById(req.params.id)
-  .then(match => {
-    if (match.owner.equals(req.user.profile_id)) {
-      match.delete()
+  .then(matches => {
+    if (matches.owner.equals(req.user.profile._id)) {
+        matches.delete()
       .then(() => {
-      res.redirect('/matches')
-    })   
-  } else {
+        res.redirect('/matches')
+      })
+    } else {
       throw new Error ("Disqualified!")
     }
   })
   .catch(err => {
-    console.log('the error:', err)
-    res.redirect('/matches')
+    console.log(err)
+    res.redirect("/matches")
   })
 }
 

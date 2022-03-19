@@ -94,10 +94,14 @@ function edit(req, res) {
     
 
 function update(req, res){
-  Match.findById(req.params.id)
-  .then(matches => {
+  console.log(req.params.id)
+  console.log(req.body)
+  Match.findByIdAndUpdate(req.params.id, req.body)  
+  .then(matches => {    
     if (matches.owner.equals(req.user.profile._id)) {
-        matches.updateOne(req.body, {new: true})
+      
+      matches.updateOne(req.body, {new: true})
+       
       .then(() => {
         res.redirect('/matches')
       })

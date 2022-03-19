@@ -7,7 +7,8 @@ function index(req, res) {
   .then(matches => {
     res.render('matches/index', {
       matches,
-      title: 'Matches'
+      title: 'Matches',
+      user: req.user
     })
   })
   .catch(err => {
@@ -22,17 +23,10 @@ function newMatch(req, res) {
 
 function create(req, res) {
   req.body.creator = req.user.profile._id
-  console.log(req.body)
   Match.create(req.body)
   .then(match => {
-    Profile.findById(req.user.profile._id)
-    .then(profile => {
-      console.log("this is the match", match)
-      profile.matches.push(match)
-      profile.save()
-      res.redirect(`/matches/${match._id}`)
-    })
-  })  
+    res.redirect(`/matches/${match._id}`)
+  })
   .catch(err => {
     console.log(err)
     res.redirect('/matches')
@@ -83,33 +77,52 @@ function createRating(req, res) {
 }
 
 function edit(req, res) {
-  Match.findById(req.params.id, function(err, match) {
-    console.log(match)
-    res.render('matches/edit', {
-      match,
-      err,
-      title: "Edit Match"
-    })
+  Match.findById(req.params.id)
+  .then(match => {
+    if (match.owner.equals(req.user.profile_id)) {
+      match.updateOne(req.body, {new: true})
+      .then(() => {
+        res.redirect('/matches')
+      })
+    } else {
+      throw new Error ("Disqualified!")
+    }
   })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/matches')
+  }) 
 }
 
 function update(req, res){
-  console.log('id', req.params.id)
-  Match.findById(req.params.id, 
-    req.body, function(err, match) { 
-      console.log(req.body)
-      console.log('hi', match)
-      res.redirect(`/matches/${match._id}`)
-  }) 
+  Match.findById(req.params.id)
+  .then(match => {
+    if (match.owner.equals(req.user.profile_id)) {
+      match.updateOne(req.body, {new: true})
+      .then(() => {
+        res.redirect('/matches')
+      })
+    } else {
+      throw new Error ("Disqualified!")
+    }
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/matches')
+  })  
 }
 
 function deleteMatch(req, res) {
   Match.findById(req.params.id)
   .then(match => {
-    match.delete()
-    .then(() => {
+    if (match.owner.equals(req.user.profile_id)) {
+      match.delete()
+      .then(() => {
       res.redirect('/matches')
-    })
+    })   
+  } else {
+      throw new Error ("Disqualified!")
+    }
   })
   .catch(err => {
     console.log('the error:', err)

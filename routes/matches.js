@@ -10,7 +10,7 @@ router.get('/', matchesCtrl.index)
 router.get('/new', matchesCtrl.new)
 // GET - localhost: 3000/matches/:id
 router.get('/:id', matchesCtrl.show)
-// GET - localhost:3000/matches/:id/edi
+// GET - localhost:3000/matches/:id/edit
 router.get('/:id/edit', isLoggedIn, matchesCtrl.edit) 
 
 // POST - localhost:3000/matches/
@@ -21,10 +21,10 @@ router.post('/:id/wrestlers', isLoggedIn, matchesCtrl.addToMatch)
 router.post('/:id/ratings', isLoggedIn, matchesCtrl.createRating)
 
 // PUT - localhost:3000/matches/:id
-router.put("/:id", matchesCtrl.update)
+router.put("/:id", isLoggedIn, matchesCtrl.update)
 
 // DELETE - localhost:3000/matches/:id
-router.delete('/:id', matchesCtrl.delete)
+router.delete('/:id', isLoggedIn, matchesCtrl.delete)
 
 export {
   router

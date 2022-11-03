@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as wrestlersCtrl from '../controllers/wrestlers.js'
+import * as wrestlersCtrl from '../../controllers/wrestlers.js'
 
 const router = Router()
 
